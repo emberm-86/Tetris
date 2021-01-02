@@ -1,12 +1,12 @@
-package com.games.tetris.service;
+package com.examples.game.tetris.service;
 
-import com.games.tetris.shape.AbstractShape;
+import com.examples.game.tetris.shape.AbstractShape;
 
 import java.awt.Color;
 
-import static com.games.tetris.common.Constants.COL_NUM;
-import static com.games.tetris.common.Constants.ROW_NUM;
-import static com.games.tetris.shape.AbstractShape.ELEMENT_NUM;
+import static com.examples.game.tetris.common.Constants.COL_NUM;
+import static com.examples.game.tetris.common.Constants.ROW_NUM;
+import static com.examples.game.tetris.shape.AbstractShape.ELEMENT_NUM;
 
 /**
  * Util class to check if the current tetromino is movable

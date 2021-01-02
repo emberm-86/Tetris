@@ -1,4 +1,4 @@
-package com.games.tetris.common;
+package com.examples.game.tetris.common;
 
 /**
  * Enum for checking in user navigation.

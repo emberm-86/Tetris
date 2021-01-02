@@ -1,4 +1,4 @@
-package com.games.tetris.shape;
+package com.examples.game.tetris.shape;
 
 import java.awt.Color;
 

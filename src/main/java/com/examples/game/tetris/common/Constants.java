@@ -1,4 +1,4 @@
-package com.games.tetris.common;
+package com.examples.game.tetris.common;
 
 public class Constants {
 

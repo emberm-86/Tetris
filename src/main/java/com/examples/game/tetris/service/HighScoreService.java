@@ -1,6 +1,6 @@
-package com.games.tetris.service;
+package com.examples.game.tetris.service;
 
-import com.games.tetris.ui.CustomDialog;
+import com.examples.game.tetris.ui.CustomDialog;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;

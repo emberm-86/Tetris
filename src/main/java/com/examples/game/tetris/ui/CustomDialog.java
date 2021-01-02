@@ -1,4 +1,4 @@
-package com.games.tetris.ui;
+package com.examples.game.tetris.ui;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;

@@ -1,13 +1,13 @@
-package com.games.tetris.service;
+package com.examples.game.tetris.service;
 
-import com.games.tetris.shape.AbstractShape;
-import com.games.tetris.shape.IShape;
-import com.games.tetris.shape.JShape;
-import com.games.tetris.shape.LShape;
-import com.games.tetris.shape.OShape;
-import com.games.tetris.shape.SShape;
-import com.games.tetris.shape.TShape;
-import com.games.tetris.shape.ZShape;
+import com.examples.game.tetris.shape.AbstractShape;
+import com.examples.game.tetris.shape.IShape;
+import com.examples.game.tetris.shape.JShape;
+import com.examples.game.tetris.shape.LShape;
+import com.examples.game.tetris.shape.OShape;
+import com.examples.game.tetris.shape.SShape;
+import com.examples.game.tetris.shape.TShape;
+import com.examples.game.tetris.shape.ZShape;
 
 import java.util.Random;
 

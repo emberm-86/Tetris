@@ -1,10 +1,10 @@
-package com.games.tetris;
+package com.examples.game.tetris;
 
-import com.games.tetris.common.GameState;
-import com.games.tetris.service.HighScoreService;
-import com.games.tetris.service.ShapeFactory;
-import com.games.tetris.service.TetrisService;
-import com.games.tetris.shape.AbstractShape;
+import com.examples.game.tetris.service.ShapeFactory;
+import com.examples.game.tetris.service.TetrisService;
+import com.examples.game.tetris.common.GameState;
+import com.examples.game.tetris.service.HighScoreService;
+import com.examples.game.tetris.shape.AbstractShape;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,11 +16,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.CompletableFuture;
 
-import static com.games.tetris.common.Constants.COL_NUM;
-import static com.games.tetris.common.Constants.FASTER_DELAY;
-import static com.games.tetris.common.Constants.NORMAL_DELAY;
-import static com.games.tetris.common.Constants.ROW_NUM;
-import static com.games.tetris.shape.AbstractShape.SIZE;
+import static com.examples.game.tetris.common.Constants.COL_NUM;
+import static com.examples.game.tetris.common.Constants.FASTER_DELAY;
+import static com.examples.game.tetris.common.Constants.NORMAL_DELAY;
+import static com.examples.game.tetris.common.Constants.ROW_NUM;
+import static com.examples.game.tetris.shape.AbstractShape.SIZE;
 
 /**
  * Game board.

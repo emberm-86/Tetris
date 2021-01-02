@@ -1,9 +1,9 @@
-package com.games.tetris.shape;
+package com.examples.game.tetris.shape;
 
 import java.awt.Color;
 
-import static com.games.tetris.common.Constants.COL_NUM;
-import static com.games.tetris.common.Constants.ROW_NUM;
+import static com.examples.game.tetris.common.Constants.COL_NUM;
+import static com.examples.game.tetris.common.Constants.ROW_NUM;
 
 public final class JShape extends AbstractShape {
 
