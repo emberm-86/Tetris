@@ -37,7 +37,7 @@ public class TetrisGamePanel extends JPanel {
     private GameState gameState;
 
     TetrisGamePanel(JFrame mainFrame) {
-        setBackground(Color.WHITE);
+        setBackground(Color.BLACK);
         setPreferredSize(new Dimension(COL_NUM * SIZE,
                 ROW_NUM * SIZE));
 
@@ -124,7 +124,7 @@ public class TetrisGamePanel extends JPanel {
      * Showing the main menu in the repaint.
      */
     private void showMenu(Graphics g) {
-        g.setColor(Color.BLUE);
+        g.setColor(Color.WHITE);
         g.setFont(new Font("default", Font.BOLD, 16));
 
         g.drawString("1. START GAME", COL_NUM * SIZE / 2 - 70, 150);
@@ -172,12 +172,12 @@ public class TetrisGamePanel extends JPanel {
             }
         }
 
-        g.setColor(Color.BLUE);
+        g.setColor(Color.WHITE);
         g.setFont(new Font("default", Font.BOLD, 16));
         g.drawString("SCORE: " + score, 10, 20);
 
         if (gameOver) {
-            g.setColor(new Color(128, 0, 0));
+            g.setColor(Color.WHITE);
             g.drawString("GAME OVER!", COL_NUM * SIZE / 2 - 60,
                     ROW_NUM * SIZE / 2 + 15);
 
