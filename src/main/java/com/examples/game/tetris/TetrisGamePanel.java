@@ -43,13 +43,7 @@ public class TetrisGamePanel extends JPanel {
         setPreferredSize(new Dimension(COL_NUM * SIZE,
                 ROW_NUM * SIZE));
 
-        actShape = ShapeFactory.createShape(COL_NUM / 2 - 1, 0);
-
-        delay = NORMAL_DELAY;
-
         fillingColors = new Color[COL_NUM][ROW_NUM];
-
-        score = 0;
 
         gameState = GameState.MAIN_MENU;
 
@@ -118,7 +112,7 @@ public class TetrisGamePanel extends JPanel {
         }
 
         gameOver = false;
-
+        score = 0;
         delay = NORMAL_DELAY;
     }
 
@@ -156,20 +150,20 @@ public class TetrisGamePanel extends JPanel {
      * if the game session is active.
      */
     private void playGame(Graphics g) {
+        if (actShape != null) {
+            actShape.updateRotationState();
+        }
+
         for (int i = 0; i < COL_NUM; i++) {
             for (int j = 0; j < ROW_NUM; j++) {
-                actShape.updateRotationState();
 
-                if (TetrisService.isInShape(actShape.getPoints(), i, j)) {
-                    g.setColor(actShape.getColor());
-                    g.fillRect(i * SIZE, j * SIZE,
-                            SIZE - 1, SIZE - 1);
+                Color color = actShape != null
+                        && TetrisService.isInShape(actShape.getPoints(), i, j)
+                        ? actShape.getColor() : fillingColors[i][j];
 
-                } else if (fillingColors[i][j] != BACKGROUND_COLOR) {
-                    g.setColor(fillingColors[i][j]);
-                    g.fillRect(i * SIZE, j * SIZE,
-                            SIZE - 1, SIZE - 1);
-                }
+                g.setColor(color);
+                g.fillRect(i * SIZE, j * SIZE,
+                        SIZE - 1, SIZE - 1);
             }
         }
 
@@ -197,11 +191,16 @@ public class TetrisGamePanel extends JPanel {
 
         @Override
         public void run() {
+            actShape = ShapeFactory.createShape(COL_NUM / 2 - 1, 0);
 
             while (!gameOver) {
 
-                while (actShape != null &&
-                        !TetrisService.isShapeLanded(actShape, fillingColors)) {
+                if (actShape == null)  {
+                    gameOver = true;
+                    break;
+                }
+
+                while (!TetrisService.isShapeLanded(actShape, fillingColors)) {
 
                     try {
                         int plusScore = TetrisService.clearRows(fillingColors);
@@ -218,11 +217,10 @@ public class TetrisGamePanel extends JPanel {
                     }
                 }
 
-                gameOver = actShape != null && actShape.getPoints()[0].y <= 1;
+                gameOver = actShape.getRotationPoint().y == 0;
 
-                if (!gameOver) {
-                    actShape = ShapeFactory.createShape(COL_NUM / 2 - 1, 0);
-                }
+                actShape = !gameOver ?
+                        ShapeFactory.createShape(COL_NUM / 2 - 1, 0) : null;
             }
 
             repaint();

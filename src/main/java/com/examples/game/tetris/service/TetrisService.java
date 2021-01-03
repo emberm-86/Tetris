@@ -78,7 +78,12 @@ public class TetrisService {
         }
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
-            fillingColors[points[i].x][points[i].y] = color;
+            int x = points[i].x;
+            int y = points[i].y;
+
+            if (x >= 0 && y >= 0) {
+                fillingColors[x][y] = color;
+            }
         }
 
         return true;
