@@ -16,6 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.CompletableFuture;
 
+import static com.examples.game.tetris.common.Constants.BACKGROUND_COLOR;
 import static com.examples.game.tetris.common.Constants.COL_NUM;
 import static com.examples.game.tetris.common.Constants.FASTER_DELAY;
 import static com.examples.game.tetris.common.Constants.NORMAL_DELAY;
@@ -37,7 +38,7 @@ public class TetrisGamePanel extends JPanel {
     private GameState gameState;
 
     TetrisGamePanel(JFrame mainFrame) {
-        setBackground(Color.BLACK);
+        setBackground(BACKGROUND_COLOR);
         setPreferredSize(new Dimension(COL_NUM * SIZE,
                 ROW_NUM * SIZE));
 
@@ -111,7 +112,7 @@ public class TetrisGamePanel extends JPanel {
     private void resetGame() {
         for (int i = 0; i < COL_NUM; i++) {
             for (int j = 0; j < ROW_NUM; j++) {
-                fillingColors[i][j] = Color.WHITE;
+                fillingColors[i][j] = BACKGROUND_COLOR;
             }
         }
 
@@ -163,7 +164,7 @@ public class TetrisGamePanel extends JPanel {
                     g.fillRect(i * SIZE, j * SIZE,
                             SIZE - 1, SIZE - 1);
 
-                } else if (fillingColors[i][j] != Color.WHITE) {
+                } else if (fillingColors[i][j] != BACKGROUND_COLOR) {
                     g.setColor(fillingColors[i][j]);
                     g.fillRect(i * SIZE, j * SIZE,
                             SIZE - 1, SIZE - 1);

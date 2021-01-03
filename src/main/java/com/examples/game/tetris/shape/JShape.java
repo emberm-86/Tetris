@@ -2,15 +2,16 @@ package com.examples.game.tetris.shape;
 
 import java.awt.Color;
 
+import static com.examples.game.tetris.common.Constants.BACKGROUND_COLOR;
 import static com.examples.game.tetris.common.Constants.COL_NUM;
 import static com.examples.game.tetris.common.Constants.ROW_NUM;
 
 public final class JShape extends AbstractShape {
 
-    private static final Color color = new Color(95, 158, 160);
+    private static final Color COLOR = new Color(95, 158, 160);
 
     public JShape(Point rotatePoint, RotationState state) {
-        super(rotatePoint, state, color);
+        super(rotatePoint, state, COLOR);
     }
 
     @Override
@@ -27,28 +28,28 @@ public final class JShape extends AbstractShape {
 
         if (state == RotationState.DOWN) {
 
-            return fillingColors[rotationPoint.x - 1][rotationPoint.y - 1] == Color.WHITE
-                    && fillingColors[rotationPoint.x - 1][rotationPoint.y] == Color.WHITE
-                    && fillingColors[rotationPoint.x + 1][rotationPoint.y] == Color.WHITE;
+            return fillingColors[rotationPoint.x - 1][rotationPoint.y - 1] == BACKGROUND_COLOR
+                    && fillingColors[rotationPoint.x - 1][rotationPoint.y] == BACKGROUND_COLOR
+                    && fillingColors[rotationPoint.x + 1][rotationPoint.y] == BACKGROUND_COLOR;
         }
 
         if (state == RotationState.UP) {
 
-            return fillingColors[rotationPoint.x + 1][rotationPoint.y] == Color.WHITE
-                    && fillingColors[rotationPoint.x + 1][rotationPoint.y + 1] == Color.WHITE
-                    && fillingColors[rotationPoint.x - 1][rotationPoint.y] == Color.WHITE;
+            return fillingColors[rotationPoint.x + 1][rotationPoint.y] == BACKGROUND_COLOR
+                    && fillingColors[rotationPoint.x + 1][rotationPoint.y + 1] == BACKGROUND_COLOR
+                    && fillingColors[rotationPoint.x - 1][rotationPoint.y] == BACKGROUND_COLOR;
         }
 
         if (state == RotationState.LEFT) {
 
-            return fillingColors[rotationPoint.x][rotationPoint.y - 1] == Color.WHITE
-                    && fillingColors[rotationPoint.x + 1][rotationPoint.y - 1] == Color.WHITE
-                    && fillingColors[rotationPoint.x][rotationPoint.y + 1] == Color.WHITE;
+            return fillingColors[rotationPoint.x][rotationPoint.y - 1] == BACKGROUND_COLOR
+                    && fillingColors[rotationPoint.x + 1][rotationPoint.y - 1] == BACKGROUND_COLOR
+                    && fillingColors[rotationPoint.x][rotationPoint.y + 1] == BACKGROUND_COLOR;
         }
 
-        return fillingColors[rotationPoint.x][rotationPoint.y + 1] == Color.WHITE
-                    && fillingColors[rotationPoint.x - 1][rotationPoint.y + 1] == Color.WHITE
-                    && fillingColors[rotationPoint.x][rotationPoint.y - 1] == Color.WHITE;
+        return fillingColors[rotationPoint.x][rotationPoint.y + 1] == BACKGROUND_COLOR
+                    && fillingColors[rotationPoint.x - 1][rotationPoint.y + 1] == BACKGROUND_COLOR
+                    && fillingColors[rotationPoint.x][rotationPoint.y - 1] == BACKGROUND_COLOR;
     }
 
     @Override

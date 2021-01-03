@@ -4,6 +4,7 @@ import com.examples.game.tetris.shape.AbstractShape;
 
 import java.awt.Color;
 
+import static com.examples.game.tetris.common.Constants.BACKGROUND_COLOR;
 import static com.examples.game.tetris.common.Constants.COL_NUM;
 import static com.examples.game.tetris.common.Constants.ROW_NUM;
 import static com.examples.game.tetris.shape.AbstractShape.ELEMENT_NUM;
@@ -24,7 +25,7 @@ public class TetrisService {
             isRowComplete[i] = true;
 
             for (int j = 0; j < COL_NUM; j++) {
-                isRowComplete[i] &= fillingColors[j][i] != Color.WHITE;
+                isRowComplete[i] &= fillingColors[j][i] != BACKGROUND_COLOR;
             }
 
             if (isRowComplete[i]) {
@@ -69,7 +70,7 @@ public class TetrisService {
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
             isLanded = isLanded
-                    || fillingColors[points[i].x][points[i].y + 1] != Color.WHITE;
+                    || fillingColors[points[i].x][points[i].y + 1] != BACKGROUND_COLOR;
         }
 
         if (!isLanded) {
@@ -78,10 +79,7 @@ public class TetrisService {
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
             fillingColors[points[i].x][points[i].y] = color;
-            System.out.print("(" + points[i].x + "," + points[i].y + ") ");
         }
-        System.out.print("- " + abstractShape.getClass().getSimpleName());
-        System.out.println();
 
         return true;
     }
@@ -108,7 +106,7 @@ public class TetrisService {
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
             movableToLeft = movableToLeft
-                    && fillingColors[points[i].x - 1][points[i].y] == Color.WHITE;
+                    && fillingColors[points[i].x - 1][points[i].y] == BACKGROUND_COLOR;
         }
 
         if (!movableToLeft) {
@@ -132,7 +130,7 @@ public class TetrisService {
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
             movableToRight = movableToRight
-                    && fillingColors[points[i].x + 1][points[i].y] == Color.WHITE;
+                    && fillingColors[points[i].x + 1][points[i].y] == BACKGROUND_COLOR;
         }
 
         if (!movableToRight) {

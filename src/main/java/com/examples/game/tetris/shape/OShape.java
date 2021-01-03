@@ -4,10 +4,10 @@ import java.awt.Color;
 
 public final class OShape extends AbstractShape {
 
-    private static final Color color = new Color(147, 112, 219);
+    private static final Color COLOR = new Color(147, 112, 219);
 
     public OShape(Point rotatePoint) {
-        super(rotatePoint, null, color);
+        super(rotatePoint, null, COLOR);
     }
 
     @Override
