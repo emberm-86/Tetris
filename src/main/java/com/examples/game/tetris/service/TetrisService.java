@@ -77,10 +77,11 @@ public class TetrisService {
         }
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
-            if ((points[i].x >= 0) && (points[i].y >= 0)) {
-                fillingColors[points[i].x][points[i].y] = color;
-            }
+            fillingColors[points[i].x][points[i].y] = color;
+            System.out.print("(" + points[i].x + "," + points[i].y + ") ");
         }
+        System.out.print("- " + abstractShape.getClass().getSimpleName());
+        System.out.println();
 
         return true;
     }
@@ -91,7 +92,7 @@ public class TetrisService {
 
         for (int k = 0; k < ELEMENT_NUM; k++) {
             isInShape = isInShape
-                    || ((points[k].x == i) && (points[k].y == j));
+                    || (points[k].x == i && points[k].y == j);
         }
 
         return isInShape;

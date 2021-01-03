@@ -1,9 +1,9 @@
 package com.examples.game.tetris;
 
-import com.examples.game.tetris.service.ShapeFactory;
-import com.examples.game.tetris.service.TetrisService;
 import com.examples.game.tetris.common.GameState;
 import com.examples.game.tetris.service.HighScoreService;
+import com.examples.game.tetris.service.ShapeFactory;
+import com.examples.game.tetris.service.TetrisService;
 import com.examples.game.tetris.shape.AbstractShape;
 
 import javax.swing.JFrame;
@@ -165,9 +165,8 @@ public class TetrisGamePanel extends JPanel {
 
                 } else if (fillingColors[i][j] != Color.WHITE) {
                     g.setColor(fillingColors[i][j]);
-                    g.fillRect(i * SIZE,
-                            j * SIZE, SIZE - 1,
-                            SIZE - 1);
+                    g.fillRect(i * SIZE, j * SIZE,
+                            SIZE - 1, SIZE - 1);
                 }
             }
         }
@@ -217,9 +216,7 @@ public class TetrisGamePanel extends JPanel {
                     }
                 }
 
-                gameOver = actShape != null
-                        && TetrisService.isShapeLanded(actShape, fillingColors)
-                        && actShape.getPoints()[0].y <= 1;
+                gameOver = actShape != null && actShape.getPoints()[0].y <= 1;
 
                 if (!gameOver) {
                     actShape = ShapeFactory.createShape(COL_NUM / 2 - 1, 0);
