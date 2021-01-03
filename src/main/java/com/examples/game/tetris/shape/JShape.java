@@ -48,8 +48,8 @@ public final class JShape extends AbstractShape {
         }
 
         return fillingColors[rotationPoint.x][rotationPoint.y + 1] == BACKGROUND_COLOR
-                    && fillingColors[rotationPoint.x - 1][rotationPoint.y + 1] == BACKGROUND_COLOR
-                    && fillingColors[rotationPoint.x][rotationPoint.y - 1] == BACKGROUND_COLOR;
+                && fillingColors[rotationPoint.x - 1][rotationPoint.y + 1] == BACKGROUND_COLOR
+                && fillingColors[rotationPoint.x][rotationPoint.y - 1] == BACKGROUND_COLOR;
     }
 
     @Override

@@ -61,7 +61,7 @@ public class TetrisService {
     }
 
     public static boolean isShapeLanded(AbstractShape abstractShape,
-            Color[][] fillingColors) {
+                                        Color[][] fillingColors) {
 
         AbstractShape.Point[] points = abstractShape.getPoints();
         Color color = abstractShape.getColor();

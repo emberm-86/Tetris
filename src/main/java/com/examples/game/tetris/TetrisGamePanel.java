@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 import static com.examples.game.tetris.common.Constants.BACKGROUND_COLOR;
 import static com.examples.game.tetris.common.Constants.COL_NUM;
 import static com.examples.game.tetris.common.Constants.FASTER_DELAY;
+import static com.examples.game.tetris.common.Constants.MENU_COLOR;
 import static com.examples.game.tetris.common.Constants.NORMAL_DELAY;
 import static com.examples.game.tetris.common.Constants.ROW_NUM;
 import static com.examples.game.tetris.shape.AbstractShape.SIZE;
@@ -125,7 +126,7 @@ public class TetrisGamePanel extends JPanel {
      * Showing the main menu in the repaint.
      */
     private void showMenu(Graphics g) {
-        g.setColor(Color.WHITE);
+        g.setColor(MENU_COLOR);
         g.setFont(new Font("default", Font.BOLD, 16));
 
         g.drawString("1. START GAME", COL_NUM * SIZE / 2 - 70, 150);
@@ -172,12 +173,12 @@ public class TetrisGamePanel extends JPanel {
             }
         }
 
-        g.setColor(Color.WHITE);
+        g.setColor(MENU_COLOR);
         g.setFont(new Font("default", Font.BOLD, 16));
         g.drawString("SCORE: " + score, 10, 20);
 
         if (gameOver) {
-            g.setColor(Color.WHITE);
+            g.setColor(MENU_COLOR);
             g.drawString("GAME OVER!", COL_NUM * SIZE / 2 - 60,
                     ROW_NUM * SIZE / 2 + 15);
 
