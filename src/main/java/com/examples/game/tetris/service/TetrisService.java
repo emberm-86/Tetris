@@ -101,7 +101,8 @@ public class TetrisService {
     }
 
     /**
-     * Check if we should draw the new tetromino before game over.
+     * Check if the new tetromino should be drawn
+     * before the game session is over.
      * */
     public static boolean isActShapeCannotBeLanded(AbstractShape abstractShape,
                                                    Color[][] fillingColors) {
@@ -123,8 +124,8 @@ public class TetrisService {
     }
 
     /**
-     * In repaint method we check if a rectangle is a
-     * part of the actual tetromino.
+     * In repaint method it is checked,
+     * if a rectangle is a part of the actual tetromino.
      * */
     public static boolean isInActShape(AbstractShape.Point[] points, int i,
                                        int j) {
