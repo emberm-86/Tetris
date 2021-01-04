@@ -158,7 +158,8 @@ public class TetrisGamePanel extends JPanel {
             for (int j = 0; j < ROW_NUM; j++) {
 
                 Color color = actShape != null
-                        && TetrisService.isInShape(actShape.getPoints(), i, j)
+                        && TetrisService.isInActShape(actShape.getPoints(),
+                        i, j)
                         ? actShape.getColor() : fillingColors[i][j];
 
                 g.setColor(color);
@@ -195,12 +196,15 @@ public class TetrisGamePanel extends JPanel {
 
             while (!gameOver) {
 
-                if (actShape == null)  {
+                if (actShape == null) {
                     gameOver = true;
                     break;
                 }
 
-                while (!TetrisService.isShapeLanded(actShape, fillingColors)) {
+                while (!TetrisService
+                        .isActShapeCannotBeLanded(actShape, fillingColors)
+                        && !TetrisService
+                                .isActShapeLanded(actShape, fillingColors)) {
 
                     try {
                         int plusScore = TetrisService.clearRows(fillingColors);
@@ -256,7 +260,7 @@ public class TetrisGamePanel extends JPanel {
 
                 case KeyEvent.VK_UP:
                     if (actShape.isRotatable(fillingColors) && !TetrisService
-                            .isShapeLanded(actShape, fillingColors)) {
+                            .isActShapeLanded(actShape, fillingColors)) {
                         actShape.setState(actShape.getState().next());
                         actShape.updateRotationState();
                     }

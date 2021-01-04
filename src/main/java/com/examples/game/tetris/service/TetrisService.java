@@ -60,7 +60,7 @@ public class TetrisService {
         return plusScore;
     }
 
-    public static boolean isShapeLanded(AbstractShape abstractShape,
+    public static boolean isActShapeLanded(AbstractShape abstractShape,
                                         Color[][] fillingColors) {
 
         AbstractShape.Point[] points = abstractShape.getPoints();
@@ -69,8 +69,13 @@ public class TetrisService {
         boolean isLanded = points[3].y == ROW_NUM - 1;
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
-            isLanded = isLanded
-                    || fillingColors[points[i].x][points[i].y + 1] != BACKGROUND_COLOR;
+            int x = points[i].x;
+            int y = points[i].y;
+
+            if (x >= 0 && y >= 0 && x < COL_NUM && y < ROW_NUM - 1) {
+                isLanded = isLanded
+                        || fillingColors[x][y + 1] != BACKGROUND_COLOR;
+            }
         }
 
         if (!isLanded) {
@@ -81,7 +86,7 @@ public class TetrisService {
             int x = points[i].x;
             int y = points[i].y;
 
-            if (x >= 0 && y >= 0) {
+            if (x >= 0 && y >= 0 && x < COL_NUM && y < ROW_NUM) {
                 fillingColors[x][y] = color;
             }
         }
@@ -89,16 +94,35 @@ public class TetrisService {
         return true;
     }
 
-    public static boolean isInShape(AbstractShape.Point[] points, int i,
-                                    int j) {
-        boolean isInShape = false;
+    public static boolean isActShapeCannotBeLanded(AbstractShape abstractShape,
+                                                   Color[][] fillingColors) {
+        boolean cannotBeLanded = false;
+
+        AbstractShape.Point[] points = abstractShape.getPoints();
+
+        for (int i = 0; i < ELEMENT_NUM; i++) {
+            int x = points[i].x;
+            int y = points[i].y;
+
+            if (x >= 0 && y >= 0 && x < COL_NUM && y < ROW_NUM) {
+                cannotBeLanded = cannotBeLanded
+                    || fillingColors[x][y] != BACKGROUND_COLOR;
+            }
+        }
+
+        return cannotBeLanded;
+    }
+
+    public static boolean isInActShape(AbstractShape.Point[] points, int i,
+                                       int j) {
+        boolean inActShape = false;
 
         for (int k = 0; k < ELEMENT_NUM; k++) {
-            isInShape = isInShape
+            inActShape = inActShape
                     || (points[k].x == i && points[k].y == j);
         }
 
-        return isInShape;
+        return inActShape;
     }
 
     public static void moveLeft(AbstractShape abstractShape,
@@ -110,8 +134,13 @@ public class TetrisService {
         boolean movableToLeft = points[1].x > 0;
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
-            movableToLeft = movableToLeft
-                    && fillingColors[points[i].x - 1][points[i].y] == BACKGROUND_COLOR;
+            int x = points[i].x;
+            int y = points[i].y;
+
+            if (x > 0 && y >= 0 && x < COL_NUM && y < ROW_NUM) {
+                movableToLeft = movableToLeft
+                        && fillingColors[x - 1][y] == BACKGROUND_COLOR;
+            }
         }
 
         if (!movableToLeft) {
@@ -119,10 +148,7 @@ public class TetrisService {
         }
 
         rotationPoint.x += -1;
-
-        for (int i = 0; i < ELEMENT_NUM; i++) {
-            points[i].x += -1;
-        }
+        abstractShape.updateRotationState();
     }
 
     public static void moveRight(AbstractShape abstractShape,
@@ -134,8 +160,13 @@ public class TetrisService {
         boolean movableToRight = points[2].x < COL_NUM - 1;
 
         for (int i = 0; i < ELEMENT_NUM; i++) {
-            movableToRight = movableToRight
-                    && fillingColors[points[i].x + 1][points[i].y] == BACKGROUND_COLOR;
+            int x = points[i].x;
+            int y = points[i].y;
+
+            if (x >= 0 && y >= 0 && x < COL_NUM - 1 && y < ROW_NUM) {
+                movableToRight = movableToRight
+                        && fillingColors[x + 1][y] == BACKGROUND_COLOR;
+            }
         }
 
         if (!movableToRight) {
@@ -143,9 +174,6 @@ public class TetrisService {
         }
 
         rotationPoint.x += 1;
-
-        for (int i = 0; i < ELEMENT_NUM; i++) {
-            points[i].x += 1;
-        }
+        abstractShape.updateRotationState();
     }
 }
