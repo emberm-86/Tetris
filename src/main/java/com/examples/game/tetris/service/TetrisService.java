@@ -72,7 +72,7 @@ public class TetrisService {
             int x = points[i].x;
             int y = points[i].y;
 
-            if (x >= 0 && y >= 0 && x < COL_NUM && y < ROW_NUM - 1) {
+            if (y >= 0 && x < COL_NUM && y < ROW_NUM - 1) {
                 isLanded = isLanded
                         || fillingColors[x][y + 1] != BACKGROUND_COLOR;
             }
@@ -86,7 +86,7 @@ public class TetrisService {
             int x = points[i].x;
             int y = points[i].y;
 
-            if (x >= 0 && y >= 0 && x < COL_NUM && y < ROW_NUM) {
+            if (y >= 0 && x < COL_NUM && y < ROW_NUM) {
                 fillingColors[x][y] = color;
             }
         }
@@ -104,7 +104,7 @@ public class TetrisService {
             int x = points[i].x;
             int y = points[i].y;
 
-            if (x >= 0 && y >= 0 && x < COL_NUM && y < ROW_NUM) {
+            if (y >= 0 && x < COL_NUM && y < ROW_NUM) {
                 cannotBeLanded = cannotBeLanded
                     || fillingColors[x][y] != BACKGROUND_COLOR;
             }
@@ -137,7 +137,7 @@ public class TetrisService {
             int x = points[i].x;
             int y = points[i].y;
 
-            if (x > 0 && y >= 0 && x < COL_NUM && y < ROW_NUM) {
+            if (x > 0 && y >= 0 && y < ROW_NUM) {
                 movableToLeft = movableToLeft
                         && fillingColors[x - 1][y] == BACKGROUND_COLOR;
             }
@@ -163,7 +163,7 @@ public class TetrisService {
             int x = points[i].x;
             int y = points[i].y;
 
-            if (x >= 0 && y >= 0 && x < COL_NUM - 1 && y < ROW_NUM) {
+            if (y >= 0 && x < COL_NUM - 1 && y < ROW_NUM) {
                 movableToRight = movableToRight
                         && fillingColors[x + 1][y] == BACKGROUND_COLOR;
             }

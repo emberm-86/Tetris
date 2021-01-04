@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class ShapeFactory {
 
-    public static final int SHAPE_TYPE_NUM = 7;
+    public static final int SHAPE_TYPE_NUM = 1;
 
     private static final Random ran = new Random();
 
