@@ -10,6 +10,6 @@ public class Constants {
     public static final int NORMAL_DELAY = 180;
     public static final int FASTER_DELAY = 30;
 
-    public static final Color BACKGROUND_COLOR = Color.BLACK;
+    public static final Color BG_COLOR = Color.BLACK;
     public static final Color MENU_COLOR = Color.WHITE;
 }

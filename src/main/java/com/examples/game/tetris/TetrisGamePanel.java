@@ -16,13 +16,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.CompletableFuture;
 
-import static com.examples.game.tetris.common.Constants.BACKGROUND_COLOR;
+import static com.examples.game.tetris.common.Constants.BG_COLOR;
 import static com.examples.game.tetris.common.Constants.COL_NUM;
 import static com.examples.game.tetris.common.Constants.FASTER_DELAY;
 import static com.examples.game.tetris.common.Constants.MENU_COLOR;
 import static com.examples.game.tetris.common.Constants.NORMAL_DELAY;
 import static com.examples.game.tetris.common.Constants.ROW_NUM;
-import static com.examples.game.tetris.shape.AbstractShape.SIZE;
+import static com.examples.game.tetris.shape.AbstractShape.RECT_SIZE;
 
 /**
  * Game board.
@@ -39,9 +39,9 @@ public class TetrisGamePanel extends JPanel {
     private GameState gameState;
 
     TetrisGamePanel(JFrame mainFrame) {
-        setBackground(BACKGROUND_COLOR);
-        setPreferredSize(new Dimension(COL_NUM * SIZE,
-                ROW_NUM * SIZE));
+        setBackground(BG_COLOR);
+        setPreferredSize(new Dimension(COL_NUM * RECT_SIZE,
+                ROW_NUM * RECT_SIZE));
 
         fillingColors = new Color[COL_NUM][ROW_NUM];
 
@@ -107,7 +107,7 @@ public class TetrisGamePanel extends JPanel {
     private void resetGame() {
         for (int i = 0; i < COL_NUM; i++) {
             for (int j = 0; j < ROW_NUM; j++) {
-                fillingColors[i][j] = BACKGROUND_COLOR;
+                fillingColors[i][j] = BG_COLOR;
             }
         }
 
@@ -123,10 +123,10 @@ public class TetrisGamePanel extends JPanel {
         g.setColor(MENU_COLOR);
         g.setFont(new Font("default", Font.BOLD, 16));
 
-        g.drawString("1. START GAME", COL_NUM * SIZE / 2 - 70, 150);
-        g.drawString("2. HIGH SCORES", COL_NUM * SIZE / 2 - 70, 200);
-        g.drawString("3. EXIT", COL_NUM * SIZE / 2 - 70, 250);
-        g.drawString("x. MAIN MENU", COL_NUM * SIZE / 2 - 70, 300);
+        g.drawString("1. START GAME", COL_NUM * RECT_SIZE / 2 - 70, 150);
+        g.drawString("2. HIGH SCORES", COL_NUM * RECT_SIZE / 2 - 70, 200);
+        g.drawString("3. EXIT", COL_NUM * RECT_SIZE / 2 - 70, 250);
+        g.drawString("x. MAIN MENU", COL_NUM * RECT_SIZE / 2 - 70, 300);
     }
 
     /**
@@ -163,8 +163,8 @@ public class TetrisGamePanel extends JPanel {
                         ? actShape.getColor() : fillingColors[i][j];
 
                 g.setColor(color);
-                g.fillRect(i * SIZE, j * SIZE,
-                        SIZE - 1, SIZE - 1);
+                g.fillRect(i * RECT_SIZE, j * RECT_SIZE,
+                        RECT_SIZE - 1, RECT_SIZE - 1);
             }
         }
 
@@ -174,13 +174,13 @@ public class TetrisGamePanel extends JPanel {
 
         if (gameOver) {
             g.setColor(MENU_COLOR);
-            g.drawString("GAME OVER!", COL_NUM * SIZE / 2 - 60,
-                    ROW_NUM * SIZE / 2 + 15);
+            g.drawString("GAME OVER!", COL_NUM * RECT_SIZE / 2 - 60,
+                    ROW_NUM * RECT_SIZE / 2 + 15);
 
             g.setFont(new Font("default", Font.BOLD, 12));
             g.drawString("PRESS X TO RETURN TO THE MAIN MENU",
-                    COL_NUM * SIZE / 2 - 120,
-                    ROW_NUM * SIZE / 2 + 65);
+                    COL_NUM * RECT_SIZE / 2 - 120,
+                    ROW_NUM * RECT_SIZE / 2 + 65);
         }
     }
 
@@ -204,7 +204,7 @@ public class TetrisGamePanel extends JPanel {
                 while (!TetrisService
                         .isActShapeCannotBeLanded(actShape, fillingColors)
                         && !TetrisService
-                                .isActShapeLanded(actShape, fillingColors)) {
+                        .isActShapeLanded(actShape, fillingColors)) {
 
                     try {
                         int plusScore = TetrisService.clearRows(fillingColors);

@@ -6,8 +6,8 @@ public final class OShape extends AbstractShape {
 
     private static final Color COLOR = new Color(147, 112, 219);
 
-    public OShape(Point rotatePoint) {
-        super(rotatePoint, null, COLOR);
+    public OShape(Point rotationPoint) {
+        super(rotationPoint, null, COLOR);
     }
 
     @Override
@@ -17,17 +17,19 @@ public final class OShape extends AbstractShape {
 
     @Override
     public void updateRotationState() {
+        int rotPx = rotationPoint.x;
+        int rotPy = rotationPoint.y;
 
-        points[0].x = rotationPoint.x - 1;
-        points[0].y = rotationPoint.y;
+        points[0].x = rotPx - 1;
+        points[0].y = rotPy;
 
-        points[1].x = rotationPoint.x - 1;
-        points[1].y = rotationPoint.y + 1;
+        points[1].x = rotPx - 1;
+        points[1].y = rotPy + 1;
 
-        points[2].x = rotationPoint.x;
-        points[2].y = rotationPoint.y;
+        points[2].x = rotPx;
+        points[2].y = rotPy;
 
-        points[3].x = rotationPoint.x;
-        points[3].y = rotationPoint.y + 1;
+        points[3].x = rotPx;
+        points[3].y = rotPy + 1;
     }
 }

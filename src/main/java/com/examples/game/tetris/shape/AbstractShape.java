@@ -6,11 +6,10 @@ import java.awt.Color;
  * Parent of all tetrominos.
  * Rotation checks for different states.
  */
-
 public abstract class AbstractShape {
 
-    public static final int SIZE = 20;
-    public static final int ELEMENT_NUM = 4;
+    public static final int RECT_SIZE = 20;
+    public static final int RECT_NUM = 4;
 
     protected Point rotationPoint;
     protected Point[] points;
@@ -27,14 +26,14 @@ public abstract class AbstractShape {
 
     public RotationState state;
 
-    public AbstractShape(Point rotatePoint, RotationState state, Color color) {
+    public AbstractShape(Point rotP, RotationState state, Color color) {
         this.color = color;
-        this.rotationPoint = rotatePoint;
+        this.rotationPoint = rotP;
         this.state = state;
 
-        this.points = new Point[ELEMENT_NUM];
+        this.points = new Point[RECT_NUM];
 
-        for (int i = 0; i < ELEMENT_NUM; i++) {
+        for (int i = 0; i < RECT_NUM; i++) {
             this.points[i] = new AbstractShape.Point(0, 0);
         }
 

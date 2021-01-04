@@ -4,10 +4,10 @@ import com.examples.game.tetris.shape.AbstractShape;
 
 import java.awt.Color;
 
-import static com.examples.game.tetris.common.Constants.BACKGROUND_COLOR;
+import static com.examples.game.tetris.common.Constants.BG_COLOR;
 import static com.examples.game.tetris.common.Constants.COL_NUM;
 import static com.examples.game.tetris.common.Constants.ROW_NUM;
-import static com.examples.game.tetris.shape.AbstractShape.ELEMENT_NUM;
+import static com.examples.game.tetris.shape.AbstractShape.RECT_NUM;
 
 /**
  * Util class to check if the current tetromino is movable
@@ -17,8 +17,8 @@ import static com.examples.game.tetris.shape.AbstractShape.ELEMENT_NUM;
 public class TetrisService {
 
     /**
-     * Clear completed rows and check the scores
-     * */
+     * Clear completed rows and check the scores.
+     */
     public static int clearRows(Color[][] fillingColors) {
         boolean[] isRowComplete = new boolean[ROW_NUM];
         int rowCountForClear = 0;
@@ -28,7 +28,7 @@ public class TetrisService {
             isRowComplete[i] = true;
 
             for (int j = 0; j < COL_NUM; j++) {
-                isRowComplete[i] &= fillingColors[j][i] != BACKGROUND_COLOR;
+                isRowComplete[i] &= fillingColors[j][i] != BG_COLOR;
             }
 
             if (isRowComplete[i]) {
@@ -65,22 +65,22 @@ public class TetrisService {
 
     /**
      * Check if the actual tetromino is landed.
-     * */
+     */
     public static boolean isActShapeLanded(AbstractShape abstractShape,
-                                        Color[][] fillingColors) {
+                                           Color[][] fillingColors) {
 
         AbstractShape.Point[] points = abstractShape.getPoints();
         Color color = abstractShape.getColor();
 
         boolean isLanded = points[3].y == ROW_NUM - 1;
 
-        for (int i = 0; i < ELEMENT_NUM; i++) {
+        for (int i = 0; i < RECT_NUM; i++) {
             int x = points[i].x;
             int y = points[i].y;
 
             if (y >= 0 && x < COL_NUM && y < ROW_NUM - 1) {
                 isLanded = isLanded
-                        || fillingColors[x][y + 1] != BACKGROUND_COLOR;
+                        || fillingColors[x][y + 1] != BG_COLOR;
             }
         }
 
@@ -88,7 +88,7 @@ public class TetrisService {
             return false;
         }
 
-        for (int i = 0; i < ELEMENT_NUM; i++) {
+        for (int i = 0; i < RECT_NUM; i++) {
             int x = points[i].x;
             int y = points[i].y;
 
@@ -101,22 +101,23 @@ public class TetrisService {
     }
 
     /**
-     * Check if the new tetromino should be drawn
+     * Check if the new tetromino must be drawn
      * before the game session is over.
-     * */
+     * Partial tetromino will not be drawn.
+     */
     public static boolean isActShapeCannotBeLanded(AbstractShape abstractShape,
                                                    Color[][] fillingColors) {
         boolean cannotBeLanded = false;
 
         AbstractShape.Point[] points = abstractShape.getPoints();
 
-        for (int i = 0; i < ELEMENT_NUM; i++) {
+        for (int i = 0; i < RECT_NUM; i++) {
             int x = points[i].x;
             int y = points[i].y;
 
             if (y >= 0 && x < COL_NUM && y < ROW_NUM) {
                 cannotBeLanded = cannotBeLanded
-                    || fillingColors[x][y] != BACKGROUND_COLOR;
+                        || fillingColors[x][y] != BG_COLOR;
             }
         }
 
@@ -126,12 +127,12 @@ public class TetrisService {
     /**
      * In repaint method it is checked,
      * if a rectangle is a part of the actual tetromino.
-     * */
+     */
     public static boolean isInActShape(AbstractShape.Point[] points, int i,
                                        int j) {
         boolean inActShape = false;
 
-        for (int k = 0; k < ELEMENT_NUM; k++) {
+        for (int k = 0; k < RECT_NUM; k++) {
             inActShape = inActShape
                     || (points[k].x == i && points[k].y == j);
         }
@@ -141,7 +142,7 @@ public class TetrisService {
 
     /**
      * Check if the tetromino is movable to left.
-     * */
+     */
     public static void moveLeft(AbstractShape abstractShape,
                                 Color[][] fillingColors) {
 
@@ -150,13 +151,13 @@ public class TetrisService {
 
         boolean movableToLeft = points[1].x > 0;
 
-        for (int i = 0; i < ELEMENT_NUM; i++) {
+        for (int i = 0; i < RECT_NUM; i++) {
             int x = points[i].x;
             int y = points[i].y;
 
             if (x > 0 && y >= 0 && y < ROW_NUM) {
                 movableToLeft = movableToLeft
-                        && fillingColors[x - 1][y] == BACKGROUND_COLOR;
+                        && fillingColors[x - 1][y] == BG_COLOR;
             }
         }
 
@@ -170,7 +171,7 @@ public class TetrisService {
 
     /**
      * Check if the tetromino is movable to right.
-     * */
+     */
     public static void moveRight(AbstractShape abstractShape,
                                  Color[][] fillingColors) {
 
@@ -179,13 +180,13 @@ public class TetrisService {
 
         boolean movableToRight = points[2].x < COL_NUM - 1;
 
-        for (int i = 0; i < ELEMENT_NUM; i++) {
+        for (int i = 0; i < RECT_NUM; i++) {
             int x = points[i].x;
             int y = points[i].y;
 
             if (y >= 0 && x < COL_NUM - 1 && y < ROW_NUM) {
                 movableToRight = movableToRight
-                        && fillingColors[x + 1][y] == BACKGROUND_COLOR;
+                        && fillingColors[x + 1][y] == BG_COLOR;
             }
         }
 
