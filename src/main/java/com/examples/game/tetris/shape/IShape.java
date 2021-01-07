@@ -15,6 +15,32 @@ public final class IShape extends AbstractShape {
     }
 
     @Override
+    public boolean isRotatable(Color[][] fillingColors) {
+        int rotPx = rotationPoint.x;
+        int rotPy = rotationPoint.y;
+
+        boolean boundaryCheck = rotPx > 0
+                && rotPy > 0
+                && rotPx < COL_NUM - 2
+                && rotPy < ROW_NUM - 2;
+
+        if (!boundaryCheck) {
+            return false;
+        }
+
+        if (state == RotationState.UP || state == RotationState.DOWN) {
+
+            return fillingColors[rotPx - 1][rotPy] == BG_COLOR
+                    && fillingColors[rotPx + 1][rotPy] == BG_COLOR
+                    && fillingColors[rotPx + 2][rotPy] == BG_COLOR;
+        }
+
+        return fillingColors[rotPx][rotPy - 1] == BG_COLOR
+                && fillingColors[rotPx][rotPy + 1] == BG_COLOR
+                && fillingColors[rotPx][rotPy + 2] == BG_COLOR;
+    }
+
+    @Override
     public synchronized void updateRotationState() {
         int rotPx = rotationPoint.x;
         int rotPy = rotationPoint.y;
@@ -47,30 +73,5 @@ public final class IShape extends AbstractShape {
             points[3].x = rotPx + 1;
             points[3].y = rotPy;
         }
-    }
-
-    @Override
-    public boolean isRotatable(Color[][] fillingColors) {
-        int rotPx = rotationPoint.x;
-        int rotPy = rotationPoint.y;
-
-        boolean boundaryCheck = rotPx > 0
-                && rotPy > 0
-                && rotPx < COL_NUM - 2
-                && rotPy < ROW_NUM - 2;
-
-        if (!boundaryCheck) {
-            return false;
-        }
-
-        if (state == RotationState.UP || state == RotationState.DOWN) {
-            return fillingColors[rotPx - 1][rotPy] == BG_COLOR
-                    && fillingColors[rotPx + 1][rotPy] == BG_COLOR
-                    && fillingColors[rotPx + 2][rotPy] == BG_COLOR;
-        }
-
-        return fillingColors[rotPx][rotPy - 1] == BG_COLOR
-                && fillingColors[rotPx][rotPy + 1] == BG_COLOR
-                && fillingColors[rotPx][rotPy + 2] == BG_COLOR;
     }
 }

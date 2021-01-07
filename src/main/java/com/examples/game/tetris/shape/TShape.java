@@ -14,6 +14,7 @@ public final class TShape extends AbstractShape {
         super(rotationPoint, state, COLOR);
     }
 
+    @Override
     public boolean isRotatable(Color[][] fillingColors) {
         int rotPx = rotationPoint.x;
         int rotPy = rotationPoint.y;
