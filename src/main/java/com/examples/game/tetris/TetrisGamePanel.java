@@ -1,10 +1,10 @@
 package com.examples.game.tetris;
 
 import com.examples.game.tetris.common.GameState;
-import com.examples.game.tetris.util.HighScoreUtil;
-import com.examples.game.tetris.util.ShapeFactory;
+import com.examples.game.tetris.service.ShapeFactory;
 import com.examples.game.tetris.service.TetrisService;
 import com.examples.game.tetris.shape.AbstractShape;
+import com.examples.game.tetris.util.HighScoreUtil;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

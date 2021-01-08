@@ -1,4 +1,4 @@
-package com.examples.game.tetris.util;
+package com.examples.game.tetris.service;
 
 import com.examples.game.tetris.shape.AbstractShape;
 import com.examples.game.tetris.shape.IShape;
