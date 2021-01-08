@@ -1,8 +1,8 @@
 package com.examples.game.tetris;
 
 import com.examples.game.tetris.common.GameState;
-import com.examples.game.tetris.service.HighScoreService;
-import com.examples.game.tetris.service.ShapeFactory;
+import com.examples.game.tetris.util.HighScoreUtil;
+import com.examples.game.tetris.util.ShapeFactory;
 import com.examples.game.tetris.service.TetrisService;
 import com.examples.game.tetris.shape.AbstractShape;
 
@@ -37,15 +37,18 @@ public class TetrisGamePanel extends JPanel {
     private int delay;
     private boolean gameOver;
     private GameState gameState;
+    private final TetrisService tetrisService;
 
-    TetrisGamePanel(JFrame mainFrame) {
+    public TetrisGamePanel(JFrame mainFrame, TetrisService tetrisService) {
         setBackground(BG_COLOR);
         setPreferredSize(new Dimension(COL_NUM * RECT_SIZE,
                 ROW_NUM * RECT_SIZE));
 
-        fillingColors = new Color[COL_NUM][ROW_NUM];
+        this.tetrisService = tetrisService;
 
-        gameState = GameState.MAIN_MENU;
+        this.fillingColors = new Color[COL_NUM][ROW_NUM];
+
+        this.gameState = GameState.MAIN_MENU;
 
         // The menu handling is defined here.
         mainFrame.addKeyListener(new KeyAdapter() {
@@ -72,7 +75,7 @@ public class TetrisGamePanel extends JPanel {
                         TetrisMove tetrisMove = new TetrisMove();
 
                         CompletableFuture.runAsync(tetrisMove)
-                                .thenRun(() -> HighScoreService
+                                .thenRun(() -> HighScoreUtil
                                         .showNewHighScoreEntryDialog(
                                                 mainFrame.getRootPane(),
                                                 score));
@@ -80,7 +83,7 @@ public class TetrisGamePanel extends JPanel {
                     }
 
                     case '2': {
-                        HighScoreService
+                        HighScoreUtil
                                 .showHighScores(mainFrame.getRootPane());
                         break;
                     }
@@ -158,7 +161,7 @@ public class TetrisGamePanel extends JPanel {
             for (int j = 0; j < ROW_NUM; j++) {
 
                 Color color = actShape != null
-                        && TetrisService.isInActShape(actShape.getPoints(),
+                        && tetrisService.isInActShape(actShape.getPoints(),
                         i, j)
                         ? actShape.getColor() : fillingColors[i][j];
 
@@ -201,13 +204,13 @@ public class TetrisGamePanel extends JPanel {
                     break;
                 }
 
-                while (!TetrisService
+                while (!tetrisService
                         .isActShapeCannotBeLanded(actShape, fillingColors)
-                        && !TetrisService
+                        && !tetrisService
                         .isActShapeLanded(actShape, fillingColors)) {
 
                     try {
-                        int plusScore = TetrisService.clearRows(fillingColors);
+                        int plusScore = tetrisService.clearRows(fillingColors);
 
                         score += plusScore;
 
@@ -259,7 +262,7 @@ public class TetrisGamePanel extends JPanel {
             switch (e.getKeyCode()) {
 
                 case KeyEvent.VK_UP:
-                    if (actShape.isRotatable(fillingColors) && !TetrisService
+                    if (actShape.isRotatable(fillingColors) && !tetrisService
                             .isActShapeLanded(actShape, fillingColors)) {
                         actShape.setState(actShape.getState().next());
                         actShape.updateRotationState();
@@ -271,11 +274,11 @@ public class TetrisGamePanel extends JPanel {
                     break;
 
                 case KeyEvent.VK_LEFT:
-                    TetrisService.moveLeft(actShape, fillingColors);
+                    tetrisService.moveLeft(actShape, fillingColors);
                     break;
 
                 case KeyEvent.VK_RIGHT:
-                    TetrisService.moveRight(actShape, fillingColors);
+                    tetrisService.moveRight(actShape, fillingColors);
                     break;
             }
         }

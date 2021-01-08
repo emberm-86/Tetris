@@ -10,7 +10,7 @@ import static com.examples.game.tetris.common.Constants.ROW_NUM;
 import static com.examples.game.tetris.shape.AbstractShape.RECT_NUM;
 
 /**
- * Util class to check if the current tetromino is movable
+ * Service class to check if the current tetromino is movable
  * or if a row is completed and if it is completed then
  * the score must be updated.
  */
@@ -19,7 +19,7 @@ public class TetrisService {
     /**
      * Clear completed rows and check the scores.
      */
-    public static int clearRows(Color[][] fillingColors) {
+    public int clearRows(Color[][] fillingColors) {
         boolean[] isRowComplete = new boolean[ROW_NUM];
         int rowCountForClear = 0;
         int plusScore = 0;
@@ -66,7 +66,7 @@ public class TetrisService {
     /**
      * Check if the actual tetromino is landed.
      */
-    public static boolean isActShapeLanded(AbstractShape abstractShape,
+    public boolean isActShapeLanded(AbstractShape abstractShape,
                                            Color[][] fillingColors) {
 
         AbstractShape.Point[] points = abstractShape.getPoints();
@@ -105,7 +105,7 @@ public class TetrisService {
      * before the game session is over.
      * Partial tetromino will not be drawn.
      */
-    public static boolean isActShapeCannotBeLanded(AbstractShape abstractShape,
+    public boolean isActShapeCannotBeLanded(AbstractShape abstractShape,
                                                    Color[][] fillingColors) {
         boolean cannotBeLanded = false;
 
@@ -128,7 +128,7 @@ public class TetrisService {
      * In repaint method it is checked,
      * if a rectangle is a part of the actual tetromino.
      */
-    public static boolean isInActShape(AbstractShape.Point[] points, int i,
+    public boolean isInActShape(AbstractShape.Point[] points, int i,
                                        int j) {
         boolean inActShape = false;
 
@@ -143,7 +143,7 @@ public class TetrisService {
     /**
      * Check if the tetromino is movable to left.
      */
-    public static void moveLeft(AbstractShape abstractShape,
+    public void moveLeft(AbstractShape abstractShape,
                                 Color[][] fillingColors) {
 
         AbstractShape.Point[] points = abstractShape.getPoints();
@@ -172,7 +172,7 @@ public class TetrisService {
     /**
      * Check if the tetromino is movable to right.
      */
-    public static void moveRight(AbstractShape abstractShape,
+    public void moveRight(AbstractShape abstractShape,
                                  Color[][] fillingColors) {
 
         AbstractShape.Point[] points = abstractShape.getPoints();

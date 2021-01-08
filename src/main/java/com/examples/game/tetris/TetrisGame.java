@@ -1,5 +1,7 @@
 package com.examples.game.tetris;
 
+import com.examples.game.tetris.service.TetrisService;
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 
@@ -19,7 +21,7 @@ public class TetrisGame extends JFrame {
         setLocation(x, y);
         setTitle(GAME_TITLE);
 
-        TetrisGamePanel panel = new TetrisGamePanel(this);
+        TetrisGamePanel panel = new TetrisGamePanel(this, new TetrisService());
         add(panel, BorderLayout.CENTER);
         addKeyListener(panel.new KeyControl());
         pack();

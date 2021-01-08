@@ -1,4 +1,4 @@
-package com.examples.game.tetris.service;
+package com.examples.game.tetris.util;
 
 import com.examples.game.tetris.ui.CustomDialog;
 
@@ -24,7 +24,7 @@ import java.util.stream.IntStream;
  * The parsing of the .csv is simplified but it is
  * enough in this case.
  */
-public class HighScoreService {
+public class HighScoreUtil {
 
     private static final String SCORE_LIST_CSV_FILE_NAME = "highscores.csv";
 
