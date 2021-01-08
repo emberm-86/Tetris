@@ -7,13 +7,7 @@ package com.examples.game.tetris.common;
  */
 public enum GameState {
 
-    MAIN_MENU('0'),
-    STARTED('1'),
-    FINISHED('2');
-
-    private char key;
-
-    GameState(char key) {
-        this.key = key;
-    }
+    MAIN_MENU,
+    STARTED,
+    FINISHED
 }
