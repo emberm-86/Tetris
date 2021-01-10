@@ -103,6 +103,17 @@ public class TetrisGamePanel extends JPanel {
         });
     }
 
+    public void drawBackGround(Graphics g)  {
+        g.setColor(Color.WHITE);
+
+        for (int i = 1; i <= COL_NUM; i++) {
+            for (int j = 1; j <= ROW_NUM; j++) {
+                g.drawLine(i * RECT_SIZE - 1, j * RECT_SIZE - 1,
+                        i * RECT_SIZE -1, j * RECT_SIZE - 1);
+            }
+        }
+    }
+
     /**
      * Restore the initial state
      * before the new game session started.
@@ -145,6 +156,7 @@ public class TetrisGamePanel extends JPanel {
             showMenu(g);
         } else {
             playGame(g);
+            drawBackGround(g);
         }
     }
 
