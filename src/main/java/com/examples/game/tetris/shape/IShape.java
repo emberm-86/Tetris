@@ -3,8 +3,6 @@ package com.examples.game.tetris.shape;
 import java.awt.Color;
 
 import static com.examples.game.tetris.common.Constants.BG_COLOR;
-import static com.examples.game.tetris.common.Constants.COL_NUM;
-import static com.examples.game.tetris.common.Constants.ROW_NUM;
 
 public final class IShape extends AbstractShape {
 
@@ -16,17 +14,12 @@ public final class IShape extends AbstractShape {
 
     @Override
     public boolean isRotatable(Color[][] fillingColors) {
-        int rotPx = rotationPoint.x;
-        int rotPy = rotationPoint.y;
-
-        boolean boundaryCheck = rotPx > 0
-                && rotPy > 0
-                && rotPx < COL_NUM - 2
-                && rotPy < ROW_NUM - 2;
-
-        if (!boundaryCheck) {
+        if (isNotInBounds(2)) {
             return false;
         }
+
+        int rotPx = rotationPoint.x;
+        int rotPy = rotationPoint.y;
 
         if (state == RotationState.UP || state == RotationState.DOWN) {
 
@@ -42,36 +35,16 @@ public final class IShape extends AbstractShape {
 
     @Override
     public synchronized void updateRotationState() {
-        int rotPx = rotationPoint.x;
-        int rotPy = rotationPoint.y;
+        resetPoints();
 
         if (state == RotationState.UP || state == RotationState.DOWN) {
-
-            points[0].x = rotPx;
-            points[0].y = rotPy - 1;
-
-            points[1].x = rotPx;
-            points[1].y = rotPy;
-
-            points[2].x = rotPx;
-            points[2].y = rotPy + 1;
-
-            points[3].x = rotPx;
-            points[3].y = rotPy + 2;
-
+            points[0].y -= 1;
+            points[2].y += 1;
+            points[3].y += 2;
         } else {
-
-            points[1].x = rotPx - 1;
-            points[1].y = rotPy;
-
-            points[0].x = rotPx;
-            points[0].y = rotPy;
-
-            points[2].x = rotPx + 2;
-            points[2].y = rotPy;
-
-            points[3].x = rotPx + 1;
-            points[3].y = rotPy;
+            points[1].x -= 1;
+            points[2].x += 2;
+            points[3].x += 1;
         }
     }
 }

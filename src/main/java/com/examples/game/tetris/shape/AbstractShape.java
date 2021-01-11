@@ -2,6 +2,9 @@ package com.examples.game.tetris.shape;
 
 import java.awt.Color;
 
+import static com.examples.game.tetris.common.Constants.COL_NUM;
+import static com.examples.game.tetris.common.Constants.ROW_NUM;
+
 /**
  * Parent of all tetrominos.
  * Rotation checks for different states.
@@ -14,6 +17,7 @@ public abstract class AbstractShape {
     protected Point rotationPoint;
     protected Point[] points;
     protected Color color;
+    public RotationState state;
 
     public enum RotationState {
 
@@ -24,13 +28,10 @@ public abstract class AbstractShape {
         }
     }
 
-    public RotationState state;
-
     public AbstractShape(Point rotP, RotationState state, Color color) {
-        this.color = color;
         this.rotationPoint = rotP;
         this.state = state;
-
+        this.color = color;
         this.points = new Point[RECT_NUM];
 
         for (int i = 0; i < RECT_NUM; i++) {
@@ -38,6 +39,25 @@ public abstract class AbstractShape {
         }
 
         updateRotationState();
+    }
+
+    /**
+     * Check the screen bounds.
+     */
+    protected boolean isNotInBounds(int i) {
+        return rotationPoint.x <= 0 || rotationPoint.y <= 0
+                || rotationPoint.x >= COL_NUM - i
+                || rotationPoint.y >= ROW_NUM - i;
+    }
+
+    /**
+     * This method called in updateRotationState.
+     */
+    protected void resetPoints() {
+        for (AbstractShape.Point point : points) {
+            point.x = rotationPoint.x;
+            point.y = rotationPoint.y;
+        }
     }
 
     public Color getColor() {

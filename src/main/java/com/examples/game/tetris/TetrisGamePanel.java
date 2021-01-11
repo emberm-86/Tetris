@@ -222,8 +222,8 @@ public class TetrisGamePanel extends JPanel {
 
                 while (!tetrisService
                         .isActShapeCannotBeLanded(actShape, fillingColors)
-                        && !tetrisService
-                        .isActShapeLanded(actShape, fillingColors)) {
+                        && tetrisService
+                        .isActShapeNotLanded(actShape, fillingColors)) {
 
                     try {
                         int plusScore = tetrisService.clearRows(fillingColors);
@@ -278,8 +278,8 @@ public class TetrisGamePanel extends JPanel {
             switch (e.getKeyCode()) {
 
                 case KeyEvent.VK_UP:
-                    if (actShape.isRotatable(fillingColors) && !tetrisService
-                            .isActShapeLanded(actShape, fillingColors)) {
+                    if (actShape.isRotatable(fillingColors) && tetrisService
+                            .isActShapeNotLanded(actShape, fillingColors)) {
                         actShape.setState(actShape.getState().next());
                         actShape.updateRotationState();
                     }

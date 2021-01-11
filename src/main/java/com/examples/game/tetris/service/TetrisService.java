@@ -66,8 +66,8 @@ public class TetrisService {
     /**
      * Check if the actual tetromino is landed.
      */
-    public boolean isActShapeLanded(AbstractShape abstractShape,
-                                           Color[][] fillingColors) {
+    public boolean isActShapeNotLanded(AbstractShape abstractShape,
+                                       Color[][] fillingColors) {
 
         AbstractShape.Point[] points = abstractShape.getPoints();
         Color color = abstractShape.getColor();
@@ -85,7 +85,7 @@ public class TetrisService {
         }
 
         if (!isLanded) {
-            return false;
+            return true;
         }
 
         for (int i = 0; i < RECT_NUM; i++) {
@@ -97,7 +97,7 @@ public class TetrisService {
             }
         }
 
-        return true;
+        return false;
     }
 
     /**

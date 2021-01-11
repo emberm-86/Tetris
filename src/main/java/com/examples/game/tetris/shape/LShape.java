@@ -3,8 +3,6 @@ package com.examples.game.tetris.shape;
 import java.awt.Color;
 
 import static com.examples.game.tetris.common.Constants.BG_COLOR;
-import static com.examples.game.tetris.common.Constants.COL_NUM;
-import static com.examples.game.tetris.common.Constants.ROW_NUM;
 
 public final class LShape extends AbstractShape {
 
@@ -16,17 +14,12 @@ public final class LShape extends AbstractShape {
 
     @Override
     public boolean isRotatable(Color[][] fillingColors) {
-        int rotPx = rotationPoint.x;
-        int rotPy = rotationPoint.y;
-
-        boolean boundaryCheck = rotPx > 0
-                && rotPy > 0
-                && rotPx < COL_NUM - 1
-                && rotPy < ROW_NUM - 1;
-
-        if (!boundaryCheck) {
+        if (isNotInBounds(1)) {
             return false;
         }
+
+        int rotPx = rotationPoint.x;
+        int rotPy = rotationPoint.y;
 
         if (state == RotationState.DOWN) {
 
@@ -56,78 +49,37 @@ public final class LShape extends AbstractShape {
 
     @Override
     public synchronized void updateRotationState() {
-        int rotPx = rotationPoint.x;
-        int rotPy = rotationPoint.y;
+        resetPoints();
 
         switch (state) {
 
-            case DOWN: {
-
-                points[0].x = rotPx;
-                points[0].y = rotPy - 1;
-
-                points[1].x = rotPx;
-                points[1].y = rotPy;
-
-                points[3].x = rotPx;
-                points[3].y = rotPy + 1;
-
-                points[2].x = rotPx + 1;
-                points[2].y = rotPy + 1;
-
+            case DOWN:
+                points[0].y -= 1;
+                points[2].x += 1;
+                points[2].y += 1;
+                points[3].y += 1;
                 break;
-            }
 
-            case UP: {
-
-                points[1].x = rotPx - 1;
-                points[1].y = rotPy - 1;
-
-                points[3].x = rotPx;
-                points[3].y = rotPy + 1;
-
-                points[2].x = rotPx;
-                points[2].y = rotPy;
-
-                points[0].x = rotPx;
-                points[0].y = rotPy - 1;
-
+            case UP:
+                points[0].y -= 1;
+                points[1].x -= 1;
+                points[1].y -= 1;
+                points[3].y += 1;
                 break;
-            }
 
-            case LEFT: {
-
-                points[0].x = rotPx;
-                points[0].y = rotPy;
-
-                points[1].x = rotPx - 1;
-                points[1].y = rotPy;
-
-                points[2].x = rotPx + 1;
-                points[2].y = rotPy;
-
-                points[3].x = rotPx - 1;
-                points[3].y = rotPy + 1;
-
+            case LEFT:
+                points[1].x -= 1;
+                points[2].x += 1;
+                points[3].x -= 1;
+                points[3].y += 1;
                 break;
-            }
 
-            case RIGHT: {
-
-                points[1].x = rotPx - 1;
-                points[1].y = rotPy;
-
-                points[3].x = rotPx;
-                points[3].y = rotPy;
-
-                points[0].x = rotPx + 1;
-                points[0].y = rotPy - 1;
-
-                points[2].x = rotPx + 1;
-                points[2].y = rotPy;
-
+            case RIGHT:
+                points[0].x += 1;
+                points[0].y -= 1;
+                points[1].x -= 1;
+                points[2].x += 1;
                 break;
-            }
         }
     }
 }

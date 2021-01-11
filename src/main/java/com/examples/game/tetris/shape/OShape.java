@@ -17,19 +17,11 @@ public final class OShape extends AbstractShape {
 
     @Override
     public void updateRotationState() {
-        int rotPx = rotationPoint.x;
-        int rotPy = rotationPoint.y;
+        resetPoints();
 
-        points[0].x = rotPx - 1;
-        points[0].y = rotPy;
-
-        points[1].x = rotPx - 1;
-        points[1].y = rotPy + 1;
-
-        points[2].x = rotPx;
-        points[2].y = rotPy;
-
-        points[3].x = rotPx;
-        points[3].y = rotPy + 1;
+        points[0].x -= 1;
+        points[1].x -= 1;
+        points[1].y += 1;
+        points[3].y += 1;
     }
 }
