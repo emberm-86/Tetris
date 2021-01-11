@@ -103,6 +103,10 @@ public class TetrisGamePanel extends JPanel {
         });
     }
 
+    /**
+     * Drawing background to check
+     * if tetromino fits correctly.
+     */
     public void drawBackGround(Graphics g)  {
         g.setColor(Color.WHITE);
 
