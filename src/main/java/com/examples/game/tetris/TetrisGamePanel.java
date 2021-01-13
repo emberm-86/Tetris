@@ -204,8 +204,8 @@ public class TetrisGamePanel extends JPanel {
     }
 
     /**
-     * This Runnable class represents the thread definition
-     * of the movement of the actual tetromino.
+     * This Runnable class represents the task definition
+     * of the actual tetromino's movement.
      */
     class TetrisMove implements Runnable {
 
