@@ -2,7 +2,7 @@
 
 Big classic Tetris game with SRS rotation system.
 
-![Check the video](videos/Tetris_demo.mp4)
+<img src="videos/Tetris_demo.gif" alt="Check the video" width="30%" height="30%"/>
 
 The current version(v1.0) contains only one level
 in the game session.
