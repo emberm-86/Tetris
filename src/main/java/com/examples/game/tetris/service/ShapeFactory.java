@@ -16,43 +16,34 @@ import java.util.Random;
  */
 public class ShapeFactory {
 
-    public static final int SHAPE_TYPE_NUM = 7;
+  private static final int SHAPE_TYPE_NUM = 7;
+  private static final Random ran = new Random();
 
-    private static final Random ran = new Random();
+  public static AbstractShape createShape(int x, int y) {
+    switch (ran.nextInt(SHAPE_TYPE_NUM)) {
+      case 0:
+        return new IShape(new AbstractShape.Point(x, y), AbstractShape.RotationState.LEFT);
 
-    public static AbstractShape createShape(int x, int y) {
+      case 1:
+        return new OShape(new AbstractShape.Point(x, y));
 
-        switch (ran.nextInt(SHAPE_TYPE_NUM)) {
+      case 2:
+        return new ZShape(new AbstractShape.Point(x, y), AbstractShape.RotationState.LEFT);
 
-            case 0:
-                return new IShape(new AbstractShape.Point(x, y),
-                        AbstractShape.RotationState.LEFT);
+      case 3:
+        return new SShape(new AbstractShape.Point(x, y), AbstractShape.RotationState.LEFT);
 
-            case 1:
-                return new OShape(new AbstractShape.Point(x, y));
+      case 4:
+        return new TShape(new AbstractShape.Point(x, y), AbstractShape.RotationState.DOWN);
 
-            case 2:
-                return new ZShape(new AbstractShape.Point(x, y),
-                        AbstractShape.RotationState.LEFT);
+      case 5:
+        return new LShape(new AbstractShape.Point(x, y), AbstractShape.RotationState.DOWN);
 
-            case 3:
-                return new SShape(new AbstractShape.Point(x, y),
-                        AbstractShape.RotationState.LEFT);
+      case 6:
+        return new JShape(new AbstractShape.Point(x, y), AbstractShape.RotationState.DOWN);
 
-            case 4:
-                return new TShape(new AbstractShape.Point(x, y),
-                        AbstractShape.RotationState.DOWN);
-
-            case 5:
-                return new LShape(new AbstractShape.Point(x, y),
-                        AbstractShape.RotationState.DOWN);
-
-            case 6:
-                return new JShape(new AbstractShape.Point(x, y),
-                        AbstractShape.RotationState.DOWN);
-
-            default:
-                return null;
-        }
+      default:
+        return null;
     }
+  }
 }

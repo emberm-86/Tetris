@@ -15,64 +15,56 @@ import java.util.List;
  */
 public class CustomDialog {
 
-    private final List<JComponent> components;
+  private final List<JComponent> components;
+  private String title;
+  private int messageType;
+  private JRootPane rootPane;
+  private String[] options;
 
-    private String title;
-    private int messageType;
-    private JRootPane rootPane;
-    private String[] options;
+  public CustomDialog(JRootPane rootPane, String title, String[] options,
+      String messageText, JComponent... components) {
+    this.components = new ArrayList<>();
+    setRootPane(rootPane);
+    setTitle(title);
+    setMessageType(JOptionPane.PLAIN_MESSAGE);
+    setOptions(options);
 
-    public CustomDialog(JRootPane rootPane,
-                        String title,
-                        String[] options,
-                        String messageText, JComponent... components) {
-
-        this.components = new ArrayList<>();
-
-        setRootPane(rootPane);
-        setTitle(title);
-        setMessageType(JOptionPane.PLAIN_MESSAGE);
-
-        setOptions(options);
-
-        if (messageText != null) {
-            addMessageText(messageText);
-        }
-
-        if (components != null) {
-            Arrays.stream(components).forEach(this::addComponent);
-        }
+    if (messageText != null) {
+      addMessageText(messageText);
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    if (components != null) {
+      Arrays.stream(components).forEach(this::addComponent);
     }
+  }
 
-    public void setMessageType(int messageType) {
-        this.messageType = messageType;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void addComponent(JComponent component) {
-        components.add(component);
-    }
+  public void setMessageType(int messageType) {
+    this.messageType = messageType;
+  }
 
-    public void addMessageText(String messageText) {
-        JLabel label = new JLabel("<html>" + messageText + "</html>");
-        addComponent(label);
-    }
+  public void addComponent(JComponent component) {
+    components.add(component);
+  }
 
-    public void setRootPane(JRootPane rootPane) {
-        this.rootPane = rootPane;
-    }
+  public void addMessageText(String messageText) {
+    JLabel label = new JLabel("<html>" + messageText + "</html>");
+    addComponent(label);
+  }
 
-    public void setOptions(String[] options) {
-        this.options = options;
-    }
+  public void setRootPane(JRootPane rootPane) {
+    this.rootPane = rootPane;
+  }
 
-    public int show() {
-        return JOptionPane.showOptionDialog(rootPane,
-                components.toArray(), title, JOptionPane.OK_CANCEL_OPTION,
-                messageType, null,
-                options, null);
-    }
+  public void setOptions(String[] options) {
+    this.options = options;
+  }
+
+  public int show() {
+    return JOptionPane.showOptionDialog(rootPane, components.toArray(), title,
+        JOptionPane.OK_CANCEL_OPTION, messageType, null, options, null);
+  }
 }
