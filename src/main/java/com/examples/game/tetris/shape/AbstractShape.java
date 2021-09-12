@@ -19,7 +19,6 @@ public abstract class AbstractShape {
   public RotationState state;
 
   public enum RotationState {
-
     DOWN, LEFT, UP, RIGHT;
 
     public RotationState next() {

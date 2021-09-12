@@ -1,21 +1,5 @@
 package com.examples.game.tetris;
 
-import com.examples.game.tetris.common.GameState;
-import com.examples.game.tetris.service.ShapeFactory;
-import com.examples.game.tetris.service.TetrisService;
-import com.examples.game.tetris.shape.AbstractShape;
-import com.examples.game.tetris.util.HighScoreUtil;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.concurrent.CompletableFuture;
-
 import static com.examples.game.tetris.common.Constants.BG_COLOR;
 import static com.examples.game.tetris.common.Constants.COL_NUM;
 import static com.examples.game.tetris.common.Constants.FASTER_DELAY;
@@ -23,6 +7,23 @@ import static com.examples.game.tetris.common.Constants.MENU_COLOR;
 import static com.examples.game.tetris.common.Constants.NORMAL_DELAY;
 import static com.examples.game.tetris.common.Constants.ROW_NUM;
 import static com.examples.game.tetris.shape.AbstractShape.RECT_SIZE;
+
+import com.examples.game.tetris.common.GameState;
+import com.examples.game.tetris.service.ShapeFactory;
+import com.examples.game.tetris.service.TetrisService;
+import com.examples.game.tetris.shape.AbstractShape;
+import com.examples.game.tetris.util.HighScoreUtil;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.IntStream;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Game board.
@@ -50,7 +51,6 @@ public class TetrisGamePanel extends JPanel {
     this.fillingColors = new Color[COL_NUM][ROW_NUM];
     this.gameState = GameState.MAIN_MENU;
 
-    // The menu handling is defined here.
     mainFrame.addKeyListener(new KeyAdapter() {
 
       @Override
@@ -59,7 +59,7 @@ public class TetrisGamePanel extends JPanel {
           return;
         }
 
-        if (gameState == GameState.FINISHED && e.getKeyChar() != 'x') {
+        if (gameState == GameState.FINISHED && e.getKeyChar() != '3') {
           return;
         }
 
@@ -79,13 +79,13 @@ public class TetrisGamePanel extends JPanel {
           }
 
           case '3': {
-            System.exit(0);
+            gameState = GameState.MAIN_MENU;
+            repaint();
             break;
           }
 
           case 'x': {
-            gameState = GameState.MAIN_MENU;
-            repaint();
+            System.exit(0);
             break;
           }
         }
@@ -128,10 +128,9 @@ public class TetrisGamePanel extends JPanel {
     g.setColor(MENU_COLOR);
     g.setFont(BIGGER_FONT);
 
-    g.drawString("1. START GAME", COL_NUM * RECT_SIZE / 2 - 70, 150);
-    g.drawString("2. HIGH SCORES", COL_NUM * RECT_SIZE / 2 - 70, 200);
-    g.drawString("3. EXIT", COL_NUM * RECT_SIZE / 2 - 70, 250);
-    g.drawString("x. MAIN MENU", COL_NUM * RECT_SIZE / 2 - 70, 300);
+    List<String> menuOpts = List.of("1. START GAME", "2. HIGH SCORES", "3. MAIN MENU", "x. EXIT");
+    IntStream.range(0, menuOpts.size())
+        .forEach(i -> g.drawString(menuOpts.get(i), COL_NUM * RECT_SIZE / 2 - 70, 150 + i * 50));
   }
 
   /**
@@ -175,7 +174,7 @@ public class TetrisGamePanel extends JPanel {
       g.setColor(MENU_COLOR);
       g.drawString("GAME OVER!", COL_NUM * RECT_SIZE / 2 - 60, ROW_NUM * RECT_SIZE / 2 + 15);
       g.setFont(SMALLER_FONT);
-      g.drawString("PRESS X TO RETURN TO THE MAIN MENU",
+      g.drawString("PRESS '3' TO RETURN TO THE MAIN MENU.",
           COL_NUM * RECT_SIZE / 2 - 120, ROW_NUM * RECT_SIZE / 2 + 65);
     }
   }
@@ -206,9 +205,11 @@ public class TetrisGamePanel extends JPanel {
             throw new RuntimeException(e.getLocalizedMessage(), e);
           }
         }
+
         gameOver = actShape.getRotationPoint().y == 0;
         actShape = !gameOver ? ShapeFactory.createShape(COL_NUM / 2 - 1, 0) : null;
       }
+
       repaint();
       gameState = GameState.FINISHED;
     }
